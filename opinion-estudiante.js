@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const launchModal = (url) => {
         basicLightbox
           .create(
-            `<div class="text-center"><a href="${url}"><img src="//apps.fcctp.edu.pe/encuestas/images/2026/opinion-estudiantes-posgrado.png" style="max-height:80vh"></a></div>`,
+            `<div class="text-center"><a href="${url}"><img src="//apps.fcctp.edu.pe/encuestas/images/2026/opinion-estudiantes-pregrado.png" style="max-height:80vh"></a></div>`,
             { closable: false },
           )
           .show();
