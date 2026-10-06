@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const redirectTo = encodeURIComponent(window.location.href);
   const COOLDOWN_MINUTES = 30;
   const templateId = 41;
-  const storageKey = `desempeno_home_${userId}_cooldown`;
+  const storageKey = `desempeno_home_${userId}_v2_cooldown`;
   const cooldownUntil = localStorage.getItem(storageKey);
   if (cooldownUntil && Date.now() < Number(cooldownUntil)) {
     return;
@@ -225,7 +225,16 @@ document.addEventListener("DOMContentLoaded", () => {
         template_id: templateId,
       }),
     })
-      .then((r) => r.json())
+      .then((r) => {
+        if (!r.ok) {
+          const error = new Error(r.statusText || `HTTP ${r.status}`);
+          error.status = r.status;
+          error.statusCode = r.status;
+          error.response = r;
+          throw error;
+        }
+        return r.json();
+      })
       .then((data) => data.encuestas);
   };
 
@@ -485,7 +494,13 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       encuestas = await fetchEncuestas();
     } catch (err) {
-      localStorage.setItem(storageKey, String(Date.now() + 60 * 60 * 1000));
+      if (
+        err?.status === 404 ||
+        err?.statusCode === 404 ||
+        err?.response?.status === 404
+      ) {
+        localStorage.setItem(storageKey, String(Date.now() + 60 * 60 * 1000));
+      }
       console.error(err);
       return;
     }
