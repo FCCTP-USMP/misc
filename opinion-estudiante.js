@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   const now = Date.now();
-  
+
   const start = new Date("2026-09-25T07:30:00-05:00").getTime();
   const end = new Date("2026-10-07T23:59:59-05:00").getTime();
-  
+
   if (now < start || now > end) {
     return;
   }
@@ -83,10 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         })
         .catch((error) => {
-          localStorage.setItem(
-            storageKey,
-            String(Date.now() + 60 * 60 * 1000),
-          );
+          localStorage.setItem(storageKey, String(Date.now() + 60 * 60 * 1000));
           console.error(error);
         });
     })
