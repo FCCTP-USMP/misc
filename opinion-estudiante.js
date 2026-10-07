@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const now = Date.now();
   
-  const start = new Date("2026-09-26T07:30:00-05:00").getTime();
+  const start = new Date("2026-09-25T07:30:00-05:00").getTime();
   const end = new Date("2026-10-07T23:59:59-05:00").getTime();
   
   if (now < start || now > end) {
